@@ -29,7 +29,8 @@ function App() {
  
 
   const AmortizationSchedule = () =>{
-    const scheduleArray = [];
+    let scheduleArray = [];
+    let scheduleObject = {};
     const initialPrinipal = principal;
     let newPrincipal = principal;
     const setMonthly = monthlyPayment;
@@ -40,12 +41,15 @@ function App() {
     let principalPaid = setMonthly-paymentInterest;
     console.log({principalPaid});
     let balance = newPrincipal - principalPaid;
-    principalPaid = balance;
+    let newPrincipalPaid = balance;
     console.log(paymentInterest);
     scheduleArray.push(1, monthlyPayment, principalPaid, paymentInterest, balance);
-    // scheduleArray.push("1");
+    scheduleObject.results = [{
+      "names" : ["Month", "Monthly Payment", "Principal Paid", "Interest You Paid", "Updated Principal"],
+      1 : [monthlyPayment, principalPaid, paymentInterest, balance], 
+    }];
+
     setResult(scheduleArray);
-    console.log({result});
     console.log({scheduleArray});
   
   };
@@ -85,7 +89,16 @@ function App() {
       <section >
         <h2>Amortization schedule</h2>
         <div id="amortizationResults">
-        
+        {/* {scheduleObject.results.names.map((x, index)=>(
+          <div
+            className="list"
+            key={index}
+          />
+          {x}
+          <div>
+        ))} */}
+
+
         {result.map((col, index)=>(
           <div
             className="list"
