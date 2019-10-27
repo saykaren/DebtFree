@@ -1,14 +1,14 @@
+/* colors darkest #232C31   dark brown #807975 light blue #97B1D2 dark blue #2E5B88 light brown #D6C9BB */
+
 .App {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-}
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+
+.App-header, footer {
+  background-color: #232C31;
+  min-height: 35%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -19,4 +19,37 @@
 
 .App-link {
   color: #09d3ac;
+}
+main{
+  background-color: #2E5B88;
+}
+
+.inputBox{
+  padding: 1rem;
+  margin: 1rem;
+  background-color: #807975;
+  display: flex;
+  flex-direction: row;
+  width: 30%;
+  color: white;
+  border-radius: 1rem;
+}
+
+.inputGroup {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  
+}
+
+#amortizationResults {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+}
+
+.list {
+  width: 15%;
+  padding: 0.5rem;
 }
