@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { end } from 'worker-farm';
 
 const FormDiv = ({title, value, changeParameter, type})=>{
   return(
@@ -24,34 +25,84 @@ function App() {
   const [interestRate, setInterestRate] = useState(3.75);
   const [monthlyPayment, setMonthlyPayment] = useState(800);
   const [extraPayment, setExtraPayment] = useState();
+  const [endingPrincipal, setEndingPrincipal] = useState();
 
   const [result, setResult] = useState([]);
  
+  let monthArray = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  let principalPaidArray = [];
+  let interestPaidArray = [];
+  let newEndingPrincipalArray = []; 
+
+  const clickMe = () =>{
+    console.log('click');
+  }
+
+  const generateCalculation = (endingPrincipal) =>{
+    if(endingPrincipal>0){
+      console.log("here");
+      console.log({endingPrincipal });
+      let paymentInterestPaid = endingPrincipal*((interestRate*.01)/12);
+      let principalPaid = monthlyPayment-paymentInterestPaid;
+      let balance = endingPrincipal-principalPaid;
+
+      principalPaidArray.push(principalPaid);
+      interestPaidArray.push(paymentInterestPaid);
+      newEndingPrincipalArray.push(balance);
+      setEndingPrincipal(balance);
+
+      console.log({principalPaidArray, interestPaidArray, newEndingPrincipalArray});
+      console.log(endingPrincipal);
+      // if(endingPrincipal>0){
+      //   generateCalculation();
+      // }
+    }else{
+      return
+    }
+  }
 
   const AmortizationSchedule = () =>{
     let scheduleArray = [];
     let scheduleObject = {};
+
+    let monthArray = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    let principalPaidArray = [];
+    let interestPaidArray = [];
+    let newEndingPrincipalArray = []; 
+
     const initialPrinipal = principal;
     let newPrincipal = principal;
     const setMonthly = monthlyPayment;
     const interestSchedule = (interestRate*.01)/12;
-    let monthDate = 1;
-
-    let paymentInterest = newPrincipal*interestSchedule;
-    let principalPaid = setMonthly-paymentInterest;
-    console.log({principalPaid});
+   
+    let paymentInterestPaid = newPrincipal*interestSchedule;
+    let principalPaid = setMonthly-paymentInterestPaid;
+    // console.log({principalPaid});
     let balance = newPrincipal - principalPaid;
     let newPrincipalPaid = balance;
-    console.log(paymentInterest);
-    scheduleArray.push(1, monthlyPayment, principalPaid, paymentInterest, balance);
-    scheduleObject.results = [{
-      "names" : ["Month", "Monthly Payment", "Principal Paid", "Interest You Paid", "Updated Principal"],
-      1 : [monthlyPayment, principalPaid, paymentInterest, balance], 
-    }];
 
-    setResult(scheduleArray);
-    console.log({scheduleArray});
-  
+    ///push into arrays
+    principalPaidArray.push(principalPaid);
+    interestPaidArray.push(paymentInterestPaid);
+    newEndingPrincipalArray.push(balance);
+    setEndingPrincipal(balance);
+
+    
+
+    
+    
+    
+
+    // scheduleArray.push(1, monthlyPayment, principalPaid, paymentInterestPaid, balance);
+    // scheduleObject.results = [{
+    //   "names" : ["Month", "Monthly Payment", "Principal Paid", "Interest You Paid", "Updated Principal"],
+    //   1 : [monthlyPayment, principalPaid, paymentInterestPaid, balance], 
+    // }];
+
+    // setResult(scheduleArray);
+    // console.log({scheduleArray});
+    
+
   };
 
   return (
@@ -88,6 +139,7 @@ function App() {
       </main>
       <section >
         <h2>Amortization schedule</h2>
+        <button onClick={generateCalculation}>Click me</button> {endingPrincipal}
         <div id="amortizationResults">
         {/* {scheduleObject.results.names.map((x, index)=>(
           <div
