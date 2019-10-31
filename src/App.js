@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import logo from './logo.svg';
 import './App.css';
-import { end } from 'worker-farm';
 
 const FormDiv = ({title, value, changeParameter, type})=>{
   return(
@@ -18,6 +16,10 @@ const FormDiv = ({title, value, changeParameter, type})=>{
   )
 }
 
+const numberConverter =(value) =>{
+  return parseFloat((value).toFixed(2));
+}
+
 
 function App() {
 
@@ -25,34 +27,37 @@ function App() {
   const [interestRate, setInterestRate] = useState(3.75);
   const [monthlyPayment, setMonthlyPayment] = useState(800);
   const [extraPayment, setExtraPayment] = useState();
-  const [endingPrincipal, setEndingPrincipal] = useState();
+  const [endingPrincipal, setEndingPrincipal] = useState(172000);
 
-  const [result, setResult] = useState([]);
+  console.log({endingPrincipal});
+
+  // const [result, setResult] = useState([]);
  
   let monthArray = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   let principalPaidArray = [];
   let interestPaidArray = [];
   let newEndingPrincipalArray = []; 
 
-  const clickMe = () =>{
-    console.log('click');
-  }
-
-  const generateCalculation = (endingPrincipal) =>{
-    if(endingPrincipal>0){
+ 
+  const generateCalculation = (currentPrincipal) =>{
+    console.log("hello I am here");
+    console.log({currentPrincipal});
+    if(currentPrincipal>0){
       console.log("here");
-      console.log({endingPrincipal });
-      let paymentInterestPaid = endingPrincipal*((interestRate*.01)/12);
-      let principalPaid = monthlyPayment-paymentInterestPaid;
-      let balance = endingPrincipal-principalPaid;
+
+      let paymentInterestPaid = numberConverter((currentPrincipal*((interestRate*.01)/12)));
+      let principalPaid = numberConverter(monthlyPayment-paymentInterestPaid)
+      let balance = numberConverter(currentPrincipal-principalPaid);
 
       principalPaidArray.push(principalPaid);
       interestPaidArray.push(paymentInterestPaid);
       newEndingPrincipalArray.push(balance);
+      console.log({balance});
       setEndingPrincipal(balance);
 
+
       console.log({principalPaidArray, interestPaidArray, newEndingPrincipalArray});
-      console.log(endingPrincipal);
+      
       // if(endingPrincipal>0){
       //   generateCalculation();
       // }
@@ -61,49 +66,49 @@ function App() {
     }
   }
 
-  const AmortizationSchedule = () =>{
-    let scheduleArray = [];
-    let scheduleObject = {};
+  // const AmortizationSchedule = () =>{
+  //   // let scheduleArray = [];
+  //   // let scheduleObject = {};
 
-    let monthArray = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-    let principalPaidArray = [];
-    let interestPaidArray = [];
-    let newEndingPrincipalArray = []; 
+  //   // let monthArray = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  //   // let principalPaidArray = [];
+  //   // let interestPaidArray = [];
+  //   // let newEndingPrincipalArray = []; 
 
-    const initialPrinipal = principal;
-    let newPrincipal = principal;
-    const setMonthly = monthlyPayment;
-    const interestSchedule = (interestRate*.01)/12;
+
+  //   // let newPrincipal = principal;
+  //   // const setMonthly = monthlyPayment;
+  //   // const interestSchedule = (interestRate*.01)/12;
    
-    let paymentInterestPaid = newPrincipal*interestSchedule;
-    let principalPaid = setMonthly-paymentInterestPaid;
-    // console.log({principalPaid});
-    let balance = newPrincipal - principalPaid;
-    let newPrincipalPaid = balance;
+  //   // let paymentInterestPaid = newPrincipal*interestSchedule;
+  //   // let principalPaid = setMonthly-paymentInterestPaid;
+  //   // // console.log({principalPaid});
+  //   // let balance = newPrincipal - principalPaid;
+  //   // let newPrincipalPaid = balance;
 
-    ///push into arrays
-    principalPaidArray.push(principalPaid);
-    interestPaidArray.push(paymentInterestPaid);
-    newEndingPrincipalArray.push(balance);
-    setEndingPrincipal(balance);
-
-    
+  //   ///push into arrays
+  //   // principalPaidArray.push(principalPaid);
+  //   // interestPaidArray.push(paymentInterestPaid);
+  //   // newEndingPrincipalArray.push(balance);
+  //   // setEndingPrincipal(balance);
 
     
+
     
     
-
-    // scheduleArray.push(1, monthlyPayment, principalPaid, paymentInterestPaid, balance);
-    // scheduleObject.results = [{
-    //   "names" : ["Month", "Monthly Payment", "Principal Paid", "Interest You Paid", "Updated Principal"],
-    //   1 : [monthlyPayment, principalPaid, paymentInterestPaid, balance], 
-    // }];
-
-    // setResult(scheduleArray);
-    // console.log({scheduleArray});
     
 
-  };
+  //   // scheduleArray.push(1, monthlyPayment, principalPaid, paymentInterestPaid, balance);
+  //   // scheduleObject.results = [{
+  //   //   "names" : ["Month", "Monthly Payment", "Principal Paid", "Interest You Paid", "Updated Principal"],
+  //   //   1 : [monthlyPayment, principalPaid, paymentInterestPaid, balance], 
+  //   // }];
+
+  //   // setResult(scheduleArray);
+  //   // console.log({scheduleArray});
+    
+
+  // };
 
   return (
     <div className="App">
@@ -135,30 +140,55 @@ function App() {
           changeParameter={setExtraPayment}
           type="number"
         />
-        <button onClick={AmortizationSchedule}>submit</button>
+        {/* <button onClick={AmortizationSchedule}>submit</button> */}
       </main>
       <section >
         <h2>Amortization schedule</h2>
-        <button onClick={generateCalculation}>Click me</button> {endingPrincipal}
+
+        <button onClick={()=>generateCalculation(endingPrincipal)}>new click </button>
         <div id="amortizationResults">
-        {/* {scheduleObject.results.names.map((x, index)=>(
-          <div
-            className="list"
-            key={index}
-          />
-          {x}
-          <div>
-        ))} */}
 
 
-        {result.map((col, index)=>(
-          <div
-            className="list"
-            key={index}
-          >
-            {col}  
-            </div>
-        ))}
+          <div className="month">
+            {monthArray.map((col, index)=>(
+              <div
+                className="list"
+                key={index}
+              >
+                {col}  
+                </div>
+            ))}
+          </div>
+          <div className="prinipalPaid">
+            {principalPaidArray.map((col, index)=>(
+              <div
+                className="list"
+                key={index}
+              >
+                {col}  
+                </div>
+            ))}
+          </div>
+          <div className="interestPaid">
+            {interestPaidArray.map((col, index)=>(
+              <div
+                className="list"
+                key={index}
+              >
+                {col}  
+                </div>
+            ))}
+          </div>
+          <div className="updatedPrincipal">
+            {newEndingPrincipalArray.map((col, index)=>(
+              <div
+                className="list"
+                key={index}
+              >
+                {col}  
+                </div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -167,3 +197,4 @@ function App() {
 }
 
 export default App;
+
