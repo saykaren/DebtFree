@@ -1,10 +1,13 @@
 /* colors darkest #232C31   dark brown #807975 light blue #97B1D2 dark blue #2E5B88 light brown #D6C9BB */
 
+#AmortizationSchedule {
+  width: 50%;
+  
+}
+
 .App {
   text-align: center;
 }
-
-
 
 .App-header, footer {
   background-color: #232C31;
@@ -22,15 +25,16 @@
 }
 main{
   background-color: #2E5B88;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .inputBox{
   padding: 1rem;
   margin: 1rem;
   background-color: #807975;
-  display: flex;
   flex-direction: row;
-  width: 30%;
   color: white;
   border-radius: 1rem;
 }
@@ -38,7 +42,7 @@ main{
 .inputGroup {
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
+  width: 20%;
   
 }
 
@@ -63,14 +67,14 @@ main{
 }
 
 .title {
-  width: 20px;
+  width: 50px;
   padding: 2rem;
   height: 20px;
 
 }
 
 .resultsBoxes {
-  width: 20px;
+  width: 50px;
   padding: 2rem;
   height: 20px;
 }

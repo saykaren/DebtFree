@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
+import InterestPayments from './InterestPayments';
 
 const FormDiv = ({title, value, changeParameter, type})=>{
   return(
@@ -16,7 +17,7 @@ const FormDiv = ({title, value, changeParameter, type})=>{
   )
 }
 
-const numberConverter =(value) =>{
+export const numberConverter =(value) =>{
   return parseFloat((value).toFixed(2));
 }
 
@@ -102,10 +103,10 @@ function App() {
         />
         {/* <button onClick={AmortizationSchedule}>submit</button> */}
       </main>
-      <section >
+      <section id="AmortizationSchedule">
         <h2>Amortization schedule</h2>
 
-        <button onClick={()=>generateCalculation(endingPrincipal)}>new click </button>
+        <button onClick={()=>generateCalculation(endingPrincipal)}>Calculate</button>
         <div className="titleGroup">
           {titleInfo.map((col, index)=>(
           <div className="title"
@@ -134,7 +135,7 @@ function App() {
                 className="list"
                 key={index}
               >
-                {col}  
+                ${col}  
                 </div>
             ))}
           </div>
@@ -144,7 +145,7 @@ function App() {
                 className="list"
                 key={index}
               >
-                {col}  
+                ${col}  
                 </div>
             ))}
           </div>
@@ -154,14 +155,15 @@ function App() {
                 className="list"
                 key={index}
               >
-                {col}  
+                ${col}  
                 </div>
             ))}
           </div>
         </div>
       </section>
-
+      <InterestPayments interestPaid={interestPaidArray}/>       
     </div>
+    
   );
 }
 
