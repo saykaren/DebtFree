@@ -7,6 +7,7 @@
 
 .App {
   text-align: center;
+  background-color: #D6C9BB;
 }
 
 .App-header, footer {
@@ -23,6 +24,12 @@
 .App-link {
   color: #09d3ac;
 }
+
+.evaluate {
+  display: flex;
+
+}
+
 main{
   background-color: #2E5B88;
   display: flex;
@@ -77,4 +84,16 @@ main{
   width: 50px;
   padding: 2rem;
   height: 20px;
+}
+
+.results {
+  display: flex;
+  flex-direction: row;
+
+}
+
+.reportResults{
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
 }

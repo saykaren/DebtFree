@@ -63,18 +63,6 @@ function App() {
       let monthDateIndex = (monthDate.length)-(Math.floor(monthDate.length/12)*12);
       setMonthDate([...monthDate, monthArray[monthDateIndex]]);
 
-      console.log({monthDateIndex});
-      // setMonthDate([...monthDate, monthArray[monthDate.length]]);
-      // (monthDate[monthDate.length-1] > 12) ? setMonthDate([...monthDate, 1]) : setMonthDate([...monthDate, monthDate[monthDate.length-1]+1]);
-      // console.log({newEndingPrincipalArray});
-
-      // console.log({balance});
-      setEndingPrincipal(balance);
-      if(endingPrincipal.length > monthDate.length){
-        setMonthDate([...monthDate, "Hola"]);        
-      }
-
-      // console.log({principalPaidArray, interestPaidArray, newEndingPrincipalArray});
     }else{
       return
     }
@@ -114,65 +102,69 @@ function App() {
         />
         {/* <button onClick={AmortizationSchedule}>submit</button> */}
       </main>
-      <section id="AmortizationSchedule">
-        <h2>Amortization schedule</h2>
+      <section className="results">
+        <section id="AmortizationSchedule">
+          <h2>Amortization schedule</h2>
 
-        <button onClick={()=>generateCalculation(endingPrincipal)}>Calculate</button>
-        <div className="titleGroup">
-          {titleInfo.map((col, index)=>(
-          <div className="title"
-            key={index}
-            >
-            {col}
+          <button onClick={()=>generateCalculation(endingPrincipal)}>Calculate</button>
+          <div className="titleGroup">
+            {titleInfo.map((col, index)=>(
+            <div className="title"
+              key={index}
+              >
+              {col}
+              </div>
+            ))}
+          </div>
+          <div id="amortizationResults">
+
+
+            <div className="month, resultsBoxes">
+              {monthDate.map((col, index)=>(
+                <div
+                  className="list"
+                  key={index}
+                >
+                  {col}  
+                  </div>
+              ))}
             </div>
-          ))}
-        </div>
-        <div id="amortizationResults">
-
-
-          <div className="month, resultsBoxes">
-            {monthDate.map((col, index)=>(
-              <div
-                className="list"
-                key={index}
-              >
-                {col}  
-                </div>
-            ))}
+            <div className="prinipalPaid, resultsBoxes">
+              {principalPaidArray.map((col, index)=>(
+                <div
+                  className="list"
+                  key={index}
+                >
+                  ${col}  
+                  </div>
+              ))}
+            </div>
+            <div className="interestPaid, resultsBoxes">
+              {interestPaidArray.map((col, index)=>(
+                <div
+                  className="list"
+                  key={index}
+                >
+                  ${col}  
+                  </div>
+              ))}
+            </div>
+            <div className="updatedPrincipal, resultsBoxes">
+              {newEndingPrincipalArray.map((col, index)=>(
+                <div
+                  className="list"
+                  key={index}
+                >
+                  ${col}  
+                  </div>
+              ))}
+            </div>
           </div>
-          <div className="prinipalPaid, resultsBoxes">
-            {principalPaidArray.map((col, index)=>(
-              <div
-                className="list"
-                key={index}
-              >
-                ${col}  
-                </div>
-            ))}
-          </div>
-          <div className="interestPaid, resultsBoxes">
-            {interestPaidArray.map((col, index)=>(
-              <div
-                className="list"
-                key={index}
-              >
-                ${col}  
-                </div>
-            ))}
-          </div>
-          <div className="updatedPrincipal, resultsBoxes">
-            {newEndingPrincipalArray.map((col, index)=>(
-              <div
-                className="list"
-                key={index}
-              >
-                ${col}  
-                </div>
-            ))}
-          </div>
-        </div>
+        </section>
+        <section className="evaluate">
+          <InterestPayments interestPaid={interestPaidArray} principal={principal} principalPaid={principalPaidArray}/>   
+        </section>    
       </section>
-      <InterestPayments interestPaid={interestPaidArray}/>       
     </div>
     
   );

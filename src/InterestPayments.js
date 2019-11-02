@@ -1,15 +1,66 @@
 import React, { useState } from 'react';
 import './App.css';
 import numberConverter from './App';
+import PieChart from 'react-minimal-pie-chart';
+ 
 
-const InterestPayments = ({interestPaid}) =>{
-    console.log({interestPaid});
+
+const InterestPayments = ({interestPaid, principal, principalPaid}) =>{
     let totalInterest = Math.round(interestPaid.reduce((acc, num)=> acc+num, 0));
+    let totalPrincipal = Math.round(principalPaid.reduce((acc, num)=> acc+num, 0));
+    let amountOfMonths = interestPaid.length;
+    console.log(principal);
 
     return(
-        <div>
+        <div className="reportResults">
             Total Interest Paid Over Loan: $
             {totalInterest}
+            <div >
+                Total Principal Paid: $
+                {totalPrincipal}
+            </div>
+            <div >
+                Amount of Months: 
+                {amountOfMonths}
+            </div>
+            <div id="container">
+            <PieChart
+                animate
+                animationDuration={500}
+                animationEasing="ease-out"
+                cx={50}
+                cy={50}
+                data={[
+                    {
+                    color: '#E38627',
+                    title: 'One',
+                    value: totalInterest
+                    },
+                    {
+                    color: '#C13C37',
+                    title: 'Two',
+                    value: totalPrincipal
+                    },
+  
+                ]}
+                label
+                labelPosition={60}
+                labelStyle={{
+                    fontFamily: 'sans-serif',
+                    fontSize: '5px'
+                }}
+                lengthAngle={360}
+                lineWidth={20}
+                onClick={undefined}
+                onMouseOut={undefined}
+                onMouseOver={undefined}
+                paddingAngle={18}
+                radius={50}
+                ratio={1}
+                rounded
+                startAngle={0}
+            />
+            </div>
         </div>
     )
 }
