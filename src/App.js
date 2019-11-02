@@ -25,6 +25,7 @@ const titleInfo = ["Date", "Principal Paid", "Interest Paid", "Ending Principal"
 
 
 function App() {
+  let monthArray = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
   //User Input 
   const [principal, setPrincipal] = useState(172000);
@@ -40,11 +41,11 @@ function App() {
   const [principalPaidArray, setPrincipalPaidArray] = useState([]);
   const [interestPaidArray, setInterestPaidArray] = useState([]);
   const [newEndingPrincipalArray, setNewEndingPrincipalArray] = useState([]);
-  const [monthDate, setMonthDate] = useState(startMonth);
+  const [monthDate, setMonthDate] = useState([]);
 
   console.log({endingPrincipal});
-
-  let monthArray = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  
+ 
  
   const generateCalculation = (currentPrincipal) =>{
     // console.log({currentPrincipal});
@@ -56,14 +57,24 @@ function App() {
       setPrincipalPaidArray([...principalPaidArray, principalPaid]);
       setInterestPaidArray([...interestPaidArray, paymentInterestPaid]);
       setNewEndingPrincipalArray([...newEndingPrincipalArray, balance]);
+      // setMonthDate([...monthDate, monthArray[monthDate.length]]);
+
+      // let monthDateIndex = (monthDate.length%12 ===0 && monthDate.length > 2) ? 12 : (monthDate.length)-(Math.floor(monthDate.length/12)*12);
+      let monthDateIndex = (monthDate.length)-(Math.floor(monthDate.length/12)*12);
+      setMonthDate([...monthDate, monthArray[monthDateIndex]]);
+
+      console.log({monthDateIndex});
+      // setMonthDate([...monthDate, monthArray[monthDate.length]]);
       // (monthDate[monthDate.length-1] > 12) ? setMonthDate([...monthDate, 1]) : setMonthDate([...monthDate, monthDate[monthDate.length-1]+1]);
-      console.log({newEndingPrincipalArray});
+      // console.log({newEndingPrincipalArray});
 
-      console.log({balance});
+      // console.log({balance});
       setEndingPrincipal(balance);
+      if(endingPrincipal.length > monthDate.length){
+        setMonthDate([...monthDate, "Hola"]);        
+      }
 
-
-      console.log({principalPaidArray, interestPaidArray, newEndingPrincipalArray});
+      // console.log({principalPaidArray, interestPaidArray, newEndingPrincipalArray});
     }else{
       return
     }
@@ -120,7 +131,7 @@ function App() {
 
 
           <div className="month, resultsBoxes">
-            {monthArray.map((col, index)=>(
+            {monthDate.map((col, index)=>(
               <div
                 className="list"
                 key={index}

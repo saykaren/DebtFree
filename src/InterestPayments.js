@@ -4,7 +4,7 @@ import numberConverter from './App';
 
 const InterestPayments = ({interestPaid}) =>{
     console.log({interestPaid});
-    let totalInterest = interestPaid.reduce((acc, num)=> acc+num, 0);
+    let totalInterest = Math.round(interestPaid.reduce((acc, num)=> acc+num, 0));
 
     return(
         <div>
