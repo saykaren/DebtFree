@@ -21,95 +21,54 @@ const numberConverter =(value) =>{
 }
 
 
+
+
 function App() {
 
+  //User Input 
   const [principal, setPrincipal] = useState(172000);
   const [interestRate, setInterestRate] = useState(3.75);
   const [monthlyPayment, setMonthlyPayment] = useState(800);
   const [extraPayment, setExtraPayment] = useState();
-  const [endingPrincipal, setEndingPrincipal] = useState(172000);
+  const [endingPrincipal, setEndingPrincipal] = useState(principal);
+
+  let todayDate = new Date();
+  let startMonth = todayDate.getMonth();
+
+  //Update Input
+  const [principalPaidArray, setPrincipalPaidArray] = useState([]);
+  const [interestPaidArray, setInterestPaidArray] = useState([]);
+  const [newEndingPrincipalArray, setNewEndingPrincipalArray] = useState([]);
+  const [monthDate, setMonthDate] = useState(startMonth);
 
   console.log({endingPrincipal});
 
-  // const [result, setResult] = useState([]);
- 
   let monthArray = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-  let principalPaidArray = [];
-  let interestPaidArray = [];
-  let newEndingPrincipalArray = []; 
-
  
   const generateCalculation = (currentPrincipal) =>{
-    console.log("hello I am here");
-    console.log({currentPrincipal});
+    // console.log({currentPrincipal});
     if(currentPrincipal>0){
-      console.log("here");
-
       let paymentInterestPaid = numberConverter((currentPrincipal*((interestRate*.01)/12)));
       let principalPaid = numberConverter(monthlyPayment-paymentInterestPaid)
       let balance = numberConverter(currentPrincipal-principalPaid);
 
-      principalPaidArray.push(principalPaid);
-      interestPaidArray.push(paymentInterestPaid);
-      newEndingPrincipalArray.push(balance);
+      setPrincipalPaidArray([...principalPaidArray, principalPaid]);
+      setInterestPaidArray([...interestPaidArray, paymentInterestPaid]);
+      setNewEndingPrincipalArray([...newEndingPrincipalArray, balance]);
+      // (monthDate[monthDate.length-1] > 12) ? setMonthDate([...monthDate, 1]) : setMonthDate([...monthDate, monthDate[monthDate.length-1]+1]);
+      console.log({newEndingPrincipalArray});
+
       console.log({balance});
       setEndingPrincipal(balance);
 
 
       console.log({principalPaidArray, interestPaidArray, newEndingPrincipalArray});
-      
-      // if(endingPrincipal>0){
-      //   generateCalculation();
-      // }
     }else{
       return
     }
   }
 
-  // const AmortizationSchedule = () =>{
-  //   // let scheduleArray = [];
-  //   // let scheduleObject = {};
-
-  //   // let monthArray = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-  //   // let principalPaidArray = [];
-  //   // let interestPaidArray = [];
-  //   // let newEndingPrincipalArray = []; 
-
-
-  //   // let newPrincipal = principal;
-  //   // const setMonthly = monthlyPayment;
-  //   // const interestSchedule = (interestRate*.01)/12;
-   
-  //   // let paymentInterestPaid = newPrincipal*interestSchedule;
-  //   // let principalPaid = setMonthly-paymentInterestPaid;
-  //   // // console.log({principalPaid});
-  //   // let balance = newPrincipal - principalPaid;
-  //   // let newPrincipalPaid = balance;
-
-  //   ///push into arrays
-  //   // principalPaidArray.push(principalPaid);
-  //   // interestPaidArray.push(paymentInterestPaid);
-  //   // newEndingPrincipalArray.push(balance);
-  //   // setEndingPrincipal(balance);
-
-    
-
-    
-    
-    
-
-  //   // scheduleArray.push(1, monthlyPayment, principalPaid, paymentInterestPaid, balance);
-  //   // scheduleObject.results = [{
-  //   //   "names" : ["Month", "Monthly Payment", "Principal Paid", "Interest You Paid", "Updated Principal"],
-  //   //   1 : [monthlyPayment, principalPaid, paymentInterestPaid, balance], 
-  //   // }];
-
-  //   // setResult(scheduleArray);
-  //   // console.log({scheduleArray});
-    
-
-  // };
-
+  
   return (
     <div className="App">
       <header className="App-header">
@@ -122,6 +81,7 @@ function App() {
           changeParameter={setPrincipal}
           type="number"
         />
+        
         <FormDiv
           title="Interest Rate"
           value={interestRate}
