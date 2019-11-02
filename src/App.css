@@ -50,6 +50,27 @@ main{
 }
 
 .list {
-  width: 15%;
+  width: 20px;
   padding: 0.5rem;
+}
+
+.titleGroup {
+  display: flex;
+  border: 1px solid #000000;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 24px;
+
+}
+
+.title {
+  width: 20px;
+  padding: 2rem;
+  height: 20px;
+
+}
+
+.resultsBoxes {
+  width: 20px;
+  padding: 2rem;
+  height: 20px;
 }

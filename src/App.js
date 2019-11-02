@@ -20,7 +20,7 @@ const numberConverter =(value) =>{
   return parseFloat((value).toFixed(2));
 }
 
-
+const titleInfo = ["Date", "Principal Paid", "Interest Paid", "Ending Principal"];
 
 
 function App() {
@@ -106,10 +106,19 @@ function App() {
         <h2>Amortization schedule</h2>
 
         <button onClick={()=>generateCalculation(endingPrincipal)}>new click </button>
+        <div className="titleGroup">
+          {titleInfo.map((col, index)=>(
+          <div className="title"
+            key={index}
+            >
+            {col}
+            </div>
+          ))}
+        </div>
         <div id="amortizationResults">
 
 
-          <div className="month">
+          <div className="month, resultsBoxes">
             {monthArray.map((col, index)=>(
               <div
                 className="list"
@@ -119,7 +128,7 @@ function App() {
                 </div>
             ))}
           </div>
-          <div className="prinipalPaid">
+          <div className="prinipalPaid, resultsBoxes">
             {principalPaidArray.map((col, index)=>(
               <div
                 className="list"
@@ -129,7 +138,7 @@ function App() {
                 </div>
             ))}
           </div>
-          <div className="interestPaid">
+          <div className="interestPaid, resultsBoxes">
             {interestPaidArray.map((col, index)=>(
               <div
                 className="list"
@@ -139,7 +148,7 @@ function App() {
                 </div>
             ))}
           </div>
-          <div className="updatedPrincipal">
+          <div className="updatedPrincipal, resultsBoxes">
             {newEndingPrincipalArray.map((col, index)=>(
               <div
                 className="list"
