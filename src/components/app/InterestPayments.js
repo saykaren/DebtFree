@@ -3,11 +3,13 @@ import './App.css';
 import numberConverter from './App';
 import PieChart from 'react-minimal-pie-chart';
  
-
+export const sumItUp = (array) =>{
+    return Math.round(array.reduce((acc, num)=> acc+num, 0));
+}
 
 const InterestPayments = ({interestPaid, principal, principalPaid}) =>{
-    let totalInterest = Math.round(interestPaid.reduce((acc, num)=> acc+num, 0));
-    let totalPrincipal = Math.round(principalPaid.reduce((acc, num)=> acc+num, 0));
+    let totalInterest = sumItUp(interestPaid);
+    let totalPrincipal = sumItUp(principalPaid);
     let amountOfMonths = interestPaid.length;
     console.log(principal);
 

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
 import InterestPayments from './InterestPayments';
+import Completion from './Completion';
 
 const FormDiv = ({title, value, changeParameter, type})=>{
   return(
@@ -26,13 +27,14 @@ const titleInfo = ["Date", "Principal Paid", "Interest Paid", "Ending Principal"
 
 function App() {
   let monthArray = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  let yearArray = [2020];
 
   //User Input 
-  const [principal, setPrincipal] = useState(172000);
-  const [interestRate, setInterestRate] = useState(3.75);
-  const [monthlyPayment, setMonthlyPayment] = useState(800);
+  const [principal, setPrincipal] = useState(10000);
+  const [interestRate, setInterestRate] = useState(3.125);
+  const [monthlyPayment, setMonthlyPayment] = useState(847.50);
   const [extraPayment, setExtraPayment] = useState();
-  const [endingPrincipal, setEndingPrincipal] = useState(principal);
+  // const [endingPrincipal, setEndingPrincipal] = useState(principal);
 
   let todayDate = new Date();
   let startMonth = todayDate.getMonth();
@@ -40,32 +42,36 @@ function App() {
   //Update Input
   const [principalPaidArray, setPrincipalPaidArray] = useState([]);
   const [interestPaidArray, setInterestPaidArray] = useState([]);
-  const [newEndingPrincipalArray, setNewEndingPrincipalArray] = useState([]);
+  const [newEndingPrincipalArray, setNewEndingPrincipalArray] = useState([principal]);
   const [monthDate, setMonthDate] = useState([]);
 
-  console.log({endingPrincipal});
-  
+  //Calculations
+  const [calculateInterestPaid, setCalculateInterestPaid] = useState();
+  const [calculatePrincipalPlusInterest, setCalculatePrincipalPlusInterest] = useState();
+  const [lastpayment, setLastPayment] = useState();
+
+  // console.log({endingPrincipal});
+  // console.log({newEndingPrincipalArray}); 
  
  
-  const generateCalculation = (currentPrincipal) =>{
+  const generateCalculation = () =>{
     // console.log({currentPrincipal});
-    if(currentPrincipal>0){
+    let currentPrincipal = newEndingPrincipalArray[newEndingPrincipalArray.length-1];
+    if(currentPrincipal>monthlyPayment){
       let paymentInterestPaid = numberConverter((currentPrincipal*((interestRate*.01)/12)));
       let principalPaid = numberConverter(monthlyPayment-paymentInterestPaid)
       let balance = numberConverter(currentPrincipal-principalPaid);
 
+
       setPrincipalPaidArray([...principalPaidArray, principalPaid]);
       setInterestPaidArray([...interestPaidArray, paymentInterestPaid]);
       setNewEndingPrincipalArray([...newEndingPrincipalArray, balance]);
-      // setMonthDate([...monthDate, monthArray[monthDate.length]]);
 
-      // let monthDateIndex = (monthDate.length%12 ===0 && monthDate.length > 2) ? 12 : (monthDate.length)-(Math.floor(monthDate.length/12)*12);
       let monthDateIndex = (monthDate.length)-(Math.floor(monthDate.length/12)*12);
       setMonthDate([...monthDate, monthArray[monthDateIndex]]);
 
-    }else{
-      return
     }
+
   }
 
   
@@ -106,7 +112,7 @@ function App() {
         <section id="AmortizationSchedule">
           <h2>Amortization schedule</h2>
 
-          <button onClick={()=>generateCalculation(endingPrincipal)}>Calculate</button>
+          <button onClick={()=>generateCalculation()}>Calculate</button>
           <div className="titleGroup">
             {titleInfo.map((col, index)=>(
             <div className="title"
@@ -150,7 +156,9 @@ function App() {
               ))}
             </div>
             <div className="updatedPrincipal, resultsBoxes">
-              {newEndingPrincipalArray.map((col, index)=>(
+              {newEndingPrincipalArray
+              .filter(x=>(x !==principal))
+              .map((col, index)=>(
                 <div
                   className="list"
                   key={index}
@@ -163,6 +171,7 @@ function App() {
         </section>
         <section className="evaluate">
           <InterestPayments interestPaid={interestPaidArray} principal={principal} principalPaid={principalPaidArray}/>   
+          <Completion interestArray={interestPaidArray} monthArray={monthDate} principal={principal}/>
         </section>    
       </section>
     </div>
