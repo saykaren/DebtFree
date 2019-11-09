@@ -2,6 +2,13 @@ import React, { useState } from 'react';
 import './App.css';
 import InterestPayments from './InterestPayments';
 import Completion from './Completion';
+import HypotheticalAnalysis from './HypotheticalAnalysis';
+
+///Dates
+let todayDate = new Date();
+let monthToday = todayDate.getMonth();
+let yearToday = todayDate.getFullYear();
+
 
 const FormDiv = ({title, value, changeParameter, type})=>{
   return(
@@ -33,11 +40,13 @@ function App() {
   const [principal, setPrincipal] = useState(10000);
   const [interestRate, setInterestRate] = useState(3.125);
   const [monthlyPayment, setMonthlyPayment] = useState(847.50);
+    
+  //Extra payment 
   const [extraPayment, setExtraPayment] = useState();
-  // const [endingPrincipal, setEndingPrincipal] = useState(principal);
+  const [extraPrincipalPaidArray, setExtraPrincipalPaidArray] = useState([]);
+  const [extraInterestPaidArray, setExtraInterestPaidArray] = useState([]);
+  const [extraNewEndingPrincipalArray, setExtraNewEndingPrincipalArray] = useState([principal]);
 
-  let todayDate = new Date();
-  let startMonth = todayDate.getMonth();
 
   //Update Input
   const [principalPaidArray, setPrincipalPaidArray] = useState([]);
@@ -45,18 +54,11 @@ function App() {
   const [newEndingPrincipalArray, setNewEndingPrincipalArray] = useState([principal]);
   const [monthDate, setMonthDate] = useState([]);
 
-  //Calculations
-  const [calculateInterestPaid, setCalculateInterestPaid] = useState();
-  const [calculatePrincipalPlusInterest, setCalculatePrincipalPlusInterest] = useState();
-  const [lastpayment, setLastPayment] = useState();
-
-  // console.log({endingPrincipal});
-  // console.log({newEndingPrincipalArray}); 
- 
  
   const generateCalculation = () =>{
     // console.log({currentPrincipal});
     let currentPrincipal = newEndingPrincipalArray[newEndingPrincipalArray.length-1];
+
     if(currentPrincipal>monthlyPayment){
       let paymentInterestPaid = numberConverter((currentPrincipal*((interestRate*.01)/12)));
       let principalPaid = numberConverter(monthlyPayment-paymentInterestPaid)
@@ -69,6 +71,25 @@ function App() {
 
       let monthDateIndex = (monthDate.length)-(Math.floor(monthDate.length/12)*12);
       setMonthDate([...monthDate, monthArray[monthDateIndex]]);
+
+    }
+    //extra payment calculations
+    let extraCurrentPrincipal = extraNewEndingPrincipalArray[extraNewEndingPrincipalArray.length-1];
+    let extraMonthlyPaymentCal = monthlyPayment+extraPayment;
+    if(extraCurrentPrincipal>monthlyPayment+extraPayment){
+      let extraPaymentInterestPaid = numberConverter((extraCurrentPrincipal*((interestRate*.01)/12)));
+      let extraPrincipalPaid = numberConverter(extraMonthlyPaymentCal-extraPaymentInterestPaid)
+      let extraBalance = numberConverter(extraCurrentPrincipal-extraPrincipalPaid);
+
+      setExtraPrincipalPaidArray([...extraPrincipalPaidArray, extraPrincipalPaid]);
+      setExtraInterestPaidArray([...extraInterestPaidArray, extraPaymentInterestPaid]);
+
+
+      setExtraNewEndingPrincipalArray([...extraNewEndingPrincipalArray, extraBalance]);
+
+      // let monthDateIndex = (monthDate.length)-(Math.floor(monthDate.length/12)*12);
+      // setMonthDate([...monthDate, monthArray[monthDateIndex]]);
+      
 
     }
 
@@ -88,6 +109,7 @@ function App() {
           type="number"
         />
         
+        
         <FormDiv
           title="Interest Rate"
           value={interestRate}
@@ -106,7 +128,7 @@ function App() {
           changeParameter={setExtraPayment}
           type="number"
         />
-        {/* <button onClick={AmortizationSchedule}>submit</button> */}
+
       </main>
       <section className="results">
         <section id="AmortizationSchedule">
@@ -170,6 +192,7 @@ function App() {
           </div>
         </section>
         <section className="evaluate">
+          <HypotheticalAnalysis principal={principal} interestPaidArray={interestPaidArray} extraPayment={extraPayment} />
           <InterestPayments interestPaid={interestPaidArray} principal={principal} principalPaid={principalPaidArray}/>   
           <Completion interestArray={interestPaidArray} monthArray={monthDate} principal={principal}/>
         </section>    
