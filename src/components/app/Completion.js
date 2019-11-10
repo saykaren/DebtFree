@@ -8,14 +8,15 @@ const sumThemUp = (array) =>{
     return Math.round(array.reduce((acc, num)=> acc+num, 0));
 };
 
-const Completion = ({interestArray, monthArray, principal} )=>{
-    console.log({interestArray});
+const Completion = ({interestPaidArray, monthArray, principal} )=>{
+    console.log({interestPaidArray});
     let lengthMonths = monthArray.length;
     console.log({lengthMonths});
+    console.log({principal});
  
     let lastMonth = monthArray[monthArray.length-1];
-    if(interestArray.length>0){
-        let bankGotThisMuch = sumThemUp(interestArray)+principal;
+    if(interestPaidArray.length>0){
+        let bankGotThisMuch = sumThemUp(interestPaidArray)+principal;
         return(
             <div>
                 <h2>{lastMonth} is when you paided off your loan! Whoohoo!</h2>

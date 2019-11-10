@@ -10,7 +10,7 @@ let monthToday = todayDate.getMonth();
 let yearToday = todayDate.getFullYear();
 
 
-const FormDiv = ({title, value, changeParameter, type})=>{
+export const FormDiv = ({title, value, changeParameter, type})=>{
   return(
     <form className="inputGroup">
       <label className="inputBox">
@@ -22,6 +22,21 @@ const FormDiv = ({title, value, changeParameter, type})=>{
         />
       </label>
     </form>
+  )
+}
+
+export const ResultArrayReturn = ({specificClassName, arrayToMap, symbol})=>{
+  return(
+    <div className={specificClassName}>
+    {arrayToMap.map((col, index)=>(
+      <div
+        className="list"
+        key={index}
+      >
+        {symbol}{col}  
+        </div>
+    ))}
+  </div>
   )
 }
 
@@ -144,39 +159,12 @@ function App() {
               </div>
             ))}
           </div>
+          
           <div id="amortizationResults">
+            <ResultArrayReturn specificClassName="month, resultsBoxes" arrayToMap={monthDate}/>
+            <ResultArrayReturn specificClassName="principalPaid, resultsBoxes" arrayToMap={principalPaidArray} symbol="$"/>
+            <ResultArrayReturn specificClassName="interestPaid, resultsBoxes" arrayToMap={interestPaidArray} symbol="$"/>
 
-
-            <div className="month, resultsBoxes">
-              {monthDate.map((col, index)=>(
-                <div
-                  className="list"
-                  key={index}
-                >
-                  {col}  
-                  </div>
-              ))}
-            </div>
-            <div className="prinipalPaid, resultsBoxes">
-              {principalPaidArray.map((col, index)=>(
-                <div
-                  className="list"
-                  key={index}
-                >
-                  ${col}  
-                  </div>
-              ))}
-            </div>
-            <div className="interestPaid, resultsBoxes">
-              {interestPaidArray.map((col, index)=>(
-                <div
-                  className="list"
-                  key={index}
-                >
-                  ${col}  
-                  </div>
-              ))}
-            </div>
             <div className="updatedPrincipal, resultsBoxes">
               {newEndingPrincipalArray
               .filter(x=>(x !==principal))
@@ -192,9 +180,23 @@ function App() {
           </div>
         </section>
         <section className="evaluate">
-          <HypotheticalAnalysis principal={principal} interestPaidArray={interestPaidArray} extraPayment={extraPayment} />
-          <InterestPayments interestPaid={interestPaidArray} principal={principal} principalPaid={principalPaidArray}/>   
-          <Completion interestArray={interestPaidArray} monthArray={monthDate} principal={principal}/>
+          <HypotheticalAnalysis 
+            extraPayment={extraPayment} 
+            extraPrincipalPaidArray={extraPrincipalPaidArray} 
+            extraInterestPaidArray={extraInterestPaidArray} 
+            monthArray={monthDate} 
+            principal={principal}
+          />
+          <InterestPayments 
+            interestPaid={interestPaidArray} 
+            principal={principal} 
+            principalPaid={principalPaidArray}
+          />   
+          <Completion 
+            interestPaidArray={interestPaidArray}
+            monthArray={monthArray}
+            principal={principal}
+          />
         </section>    
       </section>
     </div>
@@ -203,4 +205,3 @@ function App() {
 }
 
 export default App;
-
