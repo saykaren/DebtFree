@@ -3,6 +3,9 @@ import './App.css';
 import InterestPayments from './InterestPayments';
 import Completion from './Completion';
 import HypotheticalAnalysis from './HypotheticalAnalysis';
+import ResultArrayReturn from './forms/ResultArrayReturn';
+import numberConverter from'./calculations/numberConverter';
+import FormDiv from './forms/FormDiv';
 
 ///Dates
 let todayDate = new Date();
@@ -10,42 +13,7 @@ let monthToday = todayDate.getMonth();
 let yearToday = todayDate.getFullYear();
 
 
-export const FormDiv = ({title, value, changeParameter, type})=>{
-  return(
-    <form className="inputGroup">
-      <label className="inputBox">
-        {title}
-        <input 
-          type={type}
-          value={value}
-          onChange={e=>changeParameter(e.target.value)}
-        />
-      </label>
-    </form>
-  )
-}
-
-export const ResultArrayReturn = ({specificClassName, arrayToMap, symbol})=>{
-  return(
-    <div className={specificClassName}>
-    {arrayToMap.map((col, index)=>(
-      <div
-        className="list"
-        key={index}
-      >
-        {symbol}{col}  
-        </div>
-    ))}
-  </div>
-  )
-}
-
-export const numberConverter =(value) =>{
-  return parseFloat((value).toFixed(2));
-}
-
 const titleInfo = ["Date", "Principal Paid", "Interest Paid", "Ending Principal"];
-
 
 function App() {
   let monthArray = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -57,7 +25,7 @@ function App() {
   const [monthlyPayment, setMonthlyPayment] = useState(847.50);
     
   //Extra payment 
-  const [extraPayment, setExtraPayment] = useState();
+  const [extraPayment, setExtraPayment] = useState(100);
   const [extraPrincipalPaidArray, setExtraPrincipalPaidArray] = useState([]);
   const [extraInterestPaidArray, setExtraInterestPaidArray] = useState([]);
   const [extraNewEndingPrincipalArray, setExtraNewEndingPrincipalArray] = useState([principal]);
@@ -91,7 +59,7 @@ function App() {
     //extra payment calculations
     let extraCurrentPrincipal = extraNewEndingPrincipalArray[extraNewEndingPrincipalArray.length-1];
     let extraMonthlyPaymentCal = monthlyPayment+extraPayment;
-    if(extraCurrentPrincipal>monthlyPayment+extraPayment){
+    if(extraCurrentPrincipal>(monthlyPayment+extraPayment)){
       let extraPaymentInterestPaid = numberConverter((extraCurrentPrincipal*((interestRate*.01)/12)));
       let extraPrincipalPaid = numberConverter(extraMonthlyPaymentCal-extraPaymentInterestPaid)
       let extraBalance = numberConverter(extraCurrentPrincipal-extraPrincipalPaid);
@@ -102,6 +70,7 @@ function App() {
 
       setExtraNewEndingPrincipalArray([...extraNewEndingPrincipalArray, extraBalance]);
 
+      // console.log({extraInterestPaidArray});
       // let monthDateIndex = (monthDate.length)-(Math.floor(monthDate.length/12)*12);
       // setMonthDate([...monthDate, monthArray[monthDateIndex]]);
       
@@ -122,9 +91,7 @@ function App() {
           value={principal}
           changeParameter={setPrincipal}
           type="number"
-        />
-        
-        
+        />       
         <FormDiv
           title="Interest Rate"
           value={interestRate}
@@ -143,6 +110,7 @@ function App() {
           changeParameter={setExtraPayment}
           type="number"
         />
+
 
       </main>
       <section className="results">

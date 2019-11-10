@@ -1,24 +1,29 @@
 import React, { useState } from 'react';
 import './App.css';
 import FormDiv from './App.js';
-import ResultArrayReturn from './App.js';
+import ResultArrayReturn from './forms/ResultArrayReturn';
 
-
-// FormDiv = ({title, value, changeParameter, type});
 
 const HypotheticalAnalysis = ({extraPayment, extraPrincipalPaidArray, extraInterestPaidArray, monthDate, principal}) =>{
-
-    if(extraPayment === undefined) {
+    console.log({extraInterestPaidArray});
+    if(extraPayment!== undefined) {
         return(
-            <div>
-                {/* <ResultArrayReturn specificClassName="interestPaid, resultsBoxes" arrayToMap={extraInterestPaidArray}/> */}
+            <div className="interestPaid, resultsBoxes">
+                {extraInterestPaidArray.map((col, index)=>(
+                    <div
+                        className="list"
+                        key={index}
+                    >
+                    ${col}  
+                    </div>
+                ))}
             </div>
-        );
-    }
+         );
+    };
 
     return(
         <div>
-            {extraPayment}
+            You should really put an extra payment in to reduce your principal.
         </div>
     )
    
