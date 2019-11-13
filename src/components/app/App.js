@@ -6,6 +6,7 @@ import HypotheticalAnalysis from './HypotheticalAnalysis';
 import ResultArrayReturn from './forms/ResultArrayReturn';
 import numberConverter from'./calculations/numberConverter';
 import FormDiv from './forms/FormDiv';
+import Footer from './Footer';
 
 ///Dates
 let todayDate = new Date();
@@ -14,6 +15,7 @@ let yearToday = todayDate.getFullYear();
 
 
 const titleInfo = ["Date", "Principal Paid", "Interest Paid", "Ending Principal"];
+const titleExtraInfo = ["Principal Paid", "Interest Paid", "Ending Principal"];
 
 function App() {
   let monthArray = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -73,11 +75,12 @@ function App() {
       // console.log({extraInterestPaidArray});
       // let monthDateIndex = (monthDate.length)-(Math.floor(monthDate.length/12)*12);
       // setMonthDate([...monthDate, monthArray[monthDateIndex]]);
-      
-
     }
-
   }
+
+  const extraPaymentPresent = ()=>{
+    (extraPayment>0) ? console.log('Hollar') : console.log("nope");
+  };
 
   
   return (
@@ -120,13 +123,23 @@ function App() {
           <button onClick={()=>generateCalculation()}>Calculate</button>
           <div className="titleGroup">
             {titleInfo.map((col, index)=>(
-            <div className="title"
+              <div className="title"
+                key={index}
+              >
+                {col}
+              </div>
+            ))}
+          
+            {titleExtraInfo.map((col, index)=>(
+            <div className={ extraPayment>0 ? "titleExtra" : 'hidden'}
               key={index}
               >
               {col}
               </div>
             ))}
+
           </div>
+          
           
           <div id="amortizationResults">
             <ResultArrayReturn specificClassName="month, resultsBoxes" arrayToMap={monthDate}/>
@@ -145,16 +158,20 @@ function App() {
                   </div>
               ))}
             </div>
+          
+            <HypotheticalAnalysis 
+              extraPayment={extraPayment} 
+              extraPrincipalPaidArray={extraPrincipalPaidArray} 
+              extraInterestPaidArray={extraInterestPaidArray} 
+              monthArray={monthDate} 
+              principal={principal}
+              extraNewEndingPrincipalArray={extraNewEndingPrincipalArray}
+            />
+ 
           </div>
         </section>
         <section className="evaluate">
-          <HypotheticalAnalysis 
-            extraPayment={extraPayment} 
-            extraPrincipalPaidArray={extraPrincipalPaidArray} 
-            extraInterestPaidArray={extraInterestPaidArray} 
-            monthArray={monthDate} 
-            principal={principal}
-          />
+
           <InterestPayments 
             interestPaid={interestPaidArray} 
             principal={principal} 
@@ -167,6 +184,7 @@ function App() {
           />
         </section>    
       </section>
+      <Footer />
     </div>
     
   );
