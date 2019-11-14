@@ -78,9 +78,9 @@ function App() {
     }
   }
 
-  const extraPaymentPresent = ()=>{
-    (extraPayment>0) ? console.log('Hollar') : console.log("nope");
-  };
+  // const extraPaymentPresent = ()=>{
+  //   (extraPayment>0) ? console.log('Hollar') : console.log("nope");
+  // };
 
   
   return (
@@ -88,7 +88,7 @@ function App() {
       <header className="App-header">
         Give no other option not to change!
       </header>
-      <main>
+      <section id="topInput">
         <FormDiv
           title="Loan/Mortgage Amount"
           value={principal}
@@ -115,9 +115,9 @@ function App() {
         />
 
 
-      </main>
+      </section>
       <section className="results">
-        <section id="AmortizationSchedule">
+        <div id="AmortizationSchedule">
           <h2>Amortization schedule</h2>
 
           <button onClick={()=>generateCalculation()}>Calculate</button>
@@ -169,7 +169,7 @@ function App() {
             />
  
           </div>
-        </section>
+        </div>
         <section className="evaluate">
 
           <InterestPayments 
