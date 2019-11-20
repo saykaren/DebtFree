@@ -7,6 +7,8 @@ import ResultArrayReturn from './forms/ResultArrayReturn';
 import numberConverter from'./calculations/numberConverter';
 import FormDiv from './forms/FormDiv';
 import Footer from './Footer';
+import {BrowserRouter as Router} from 'react-router-dom';
+import InputSection from './InputSection';
 
 ///Dates
 let todayDate = new Date();
@@ -21,26 +23,37 @@ function App() {
   let monthArray = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   let yearArray = [2020];
 
-  //User Input 
+  // // //User Input 
   const [principal, setPrincipal] = useState(10000);
   const [interestRate, setInterestRate] = useState(3.125);
   const [monthlyPayment, setMonthlyPayment] = useState(847.50);
+  const [extraPayment, setExtraPayment] = useState(100);
+
+  console.log({interestRate});
     
   //Extra payment 
-  const [extraPayment, setExtraPayment] = useState(100);
   const [extraPrincipalPaidArray, setExtraPrincipalPaidArray] = useState([]);
   const [extraInterestPaidArray, setExtraInterestPaidArray] = useState([]);
-  const [extraNewEndingPrincipalArray, setExtraNewEndingPrincipalArray] = useState([principal]);
+  const [extraNewEndingPrincipalArray, setExtraNewEndingPrincipalArray] = useState([]);
 
+  
 
   //Update Input
   const [principalPaidArray, setPrincipalPaidArray] = useState([]);
   const [interestPaidArray, setInterestPaidArray] = useState([]);
-  const [newEndingPrincipalArray, setNewEndingPrincipalArray] = useState([principal]);
+  const [newEndingPrincipalArray, setNewEndingPrincipalArray] = useState([]);
   const [monthDate, setMonthDate] = useState([]);
 
  
   const generateCalculation = () =>{
+    console.log(extraNewEndingPrincipalArray);
+    if(extraNewEndingPrincipalArray.length<1){
+      setExtraNewEndingPrincipalArray([principal]);
+    }
+
+    if(newEndingPrincipalArray.length<1){
+      setNewEndingPrincipalArray([principal]);
+    }
     // console.log({currentPrincipal});
     let currentPrincipal = newEndingPrincipalArray[newEndingPrincipalArray.length-1];
 
@@ -77,45 +90,22 @@ function App() {
       // setMonthDate([...monthDate, monthArray[monthDateIndex]]);
     }
   }
-
-  // const extraPaymentPresent = ()=>{
-  //   (extraPayment>0) ? console.log('Hollar') : console.log("nope");
-  // };
-
-  
+ 
   return (
     <div className="App">
       <header className="App-header">
         Give no other option not to change!
       </header>
-      <section id="topInput">
-        <FormDiv
-          title="Loan/Mortgage Amount"
-          value={principal}
-          changeParameter={setPrincipal}
-          type="number"
-        />       
-        <FormDiv
-          title="Interest Rate"
-          value={interestRate}
-          changeParameter={setInterestRate}
-          type="number"
+      <InputSection 
+          principal={principal}
+          setPrincipal={setPrincipal}
+          interestRate={interestRate} 
+          setInterestRate={setInterestRate}
+          monthlyPayment={monthlyPayment}
+          setMonthlyPayment={setMonthlyPayment}
+          extraPayment={extraPayment} 
+          setExtraPayment={setExtraPayment}
         />
-        <FormDiv
-          title="Set Monthly Payment"
-          value={monthlyPayment}
-          changeParameter={setMonthlyPayment}
-          type="number"
-        />
-        <FormDiv
-          title="Extra payment to monthly amount"
-          value={extraPayment}
-          changeParameter={setExtraPayment}
-          type="number"
-        />
-
-
-      </section>
       <section className="results">
         <div id="AmortizationSchedule">
           <h2>Amortization schedule</h2>

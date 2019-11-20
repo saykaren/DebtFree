@@ -11,7 +11,7 @@ const InterestPayments = ({interestPaid, principal, principalPaid}) =>{
     let totalInterest = sumItUp(interestPaid);
     let totalPrincipal = sumItUp(principalPaid);
     let amountOfMonths = interestPaid.length;
-    console.log(principal);
+    // console.log(principal);
 
     return(
         <div className="reportResults">

@@ -9,10 +9,10 @@ const sumThemUp = (array) =>{
 };
 
 const Completion = ({interestPaidArray, monthArray, principal} )=>{
-    console.log({interestPaidArray});
+    // console.log({interestPaidArray});
     let lengthMonths = monthArray.length;
-    console.log({lengthMonths});
-    console.log({principal});
+    // console.log({lengthMonths});
+    // console.log({principal});
  
     let lastMonth = monthArray[monthArray.length-1];
     if(interestPaidArray.length>0){

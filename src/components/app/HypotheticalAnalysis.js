@@ -20,7 +20,7 @@ const makeMeAMapDiv = ({littleDivClassName, array})=>{
 };
 
 const HypotheticalAnalysis = ({extraPayment, extraPrincipalPaidArray, extraInterestPaidArray, monthDate, principal, extraNewEndingPrincipalArray}) =>{
-    console.log({extraInterestPaidArray});
+    // console.log({extraInterestPaidArray});
     if(extraPayment!== undefined) {
         return(
             <section className='extraResult'>
