@@ -10,8 +10,9 @@ const ExtraPayments = () =>{
 
     return(
         <>
-        <div>Extra Payments</div>
-        <button onClick={goBackHistory}>Go Back</button>
+            <button onClick={goBackHistory}>Go Back</button>
+            <div>Extra Payments</div>
+
         </>
     )
 }

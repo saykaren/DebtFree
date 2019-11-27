@@ -1,5 +1,20 @@
 /* colors darkest #232C31   dark brown #807975 light blue #97B1D2 dark blue #2E5B88 light brown #D6C9BB */
 
+button {
+  background-color: #232C31;
+  border-radius: 5px;
+  color: white;
+  padding: 5px;
+  border: solid 1px white;
+  margin: 5px;
+}
+
+button:hover{
+  background-color: white;
+  color: black;
+  border: solid 2px pink;
+}
+
 #AmortizationSchedule {
   /* width: 50%; */
   height: 700px;
@@ -160,4 +175,8 @@ a {
 
 a:visited{
   color:white;
+}
+
+#main {
+  height: 80%;
 }

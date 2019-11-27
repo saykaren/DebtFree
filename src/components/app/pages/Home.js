@@ -1,8 +1,12 @@
 import React from 'react';
+import InputSection from './../InputSection';
 
 const Home = () =>{
     return(
-        <div>Home</div>
+        <>
+        <InputSection />
+        Hola
+        </>
     )
 }
 

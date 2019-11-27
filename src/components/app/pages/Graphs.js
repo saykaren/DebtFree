@@ -10,8 +10,9 @@ const Graphs = () =>{
     }
     return(
         <>
-            <div>Graphs {firstname} {lastname}</div>
             <button onClick={goBackHistory}>Go Back</button>
+            <div>Graphs {firstname} {lastname}</div>
+            
         </>
     )
 }

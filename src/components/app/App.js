@@ -5,7 +5,7 @@ import Home from './pages/Home';
 import Amortization from './pages/Amortization';
 import ExtraPayments from './pages/ExtraPayments';
 import Graphs from './pages/Graphs';
-
+import Footer from './Footer';
 
 
 import MainStateApp from './MainStateApp';
@@ -38,15 +38,15 @@ const App = ()=>{
             </li>
           </ul>
         </header>
-          <div>
+          <section id="main">
             <Switch>
               <Route exact path="/" component={Home}/>
               <Route exact path="/Amortization" component={Amortization} />
               <Route exact path="/Extra_Payments" component={ExtraPayments}/>
               <Route exact path="/Graphs/:firstname/:lastname" component={Graphs} />
             </Switch>
-          </div>
-        
+          </section>
+        <Footer />
       </div>
     </Router>
 

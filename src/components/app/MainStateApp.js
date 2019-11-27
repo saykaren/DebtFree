@@ -6,8 +6,6 @@ import HypotheticalAnalysis from './HypotheticalAnalysis';
 import ResultArrayReturn from './forms/ResultArrayReturn';
 import numberConverter from'./calculations/numberConverter';
 import FormDiv from './forms/FormDiv';
-import Footer from './Footer';
-import {BrowserRouter as Router, Link} from 'react-router-dom';
 import InputSection from './InputSection';
 
 ///Dates
@@ -174,7 +172,6 @@ const MainStateApp= () => {
           />
         </section>    
       </section>
-      <Footer />
     </div>
     
   );
