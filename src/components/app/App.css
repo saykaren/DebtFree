@@ -140,3 +140,24 @@
 #sayKarenLogo {
   height: 3.2rem;
 }
+
+ul {
+  display: flex;
+  flex-direction: row;
+}
+
+li {
+  width: 200px;
+  list-style-type: none;
+  border: 1px solid gray;
+  padding: 5px;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+a:visited{
+  color:white;
+}

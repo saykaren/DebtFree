@@ -1,15 +1,55 @@
 import React from 'react';
 import './App.css';
-import {BrowserRouter as Router, Link} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom';
+import Home from './pages/Home';
+import Amortization from './pages/Amortization';
+import ExtraPayments from './pages/ExtraPayments';
+import Graphs from './pages/Graphs';
+
 
 
 import MainStateApp from './MainStateApp';
 
 const App = ()=>{
   return(
-    <div>
-      <MainStateApp />
-    </div>
+    <Router>
+    <div className="App">
+        <header className="App-header">
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to={
+                {
+                  pathname: "/Amortization",
+                  state: {
+                    
+                    from:"./MainStateApp.js"
+                  }
+                }
+              }>Amortization</Link>
+            </li>
+            <li>
+              <Link to="/Extra_Payments">Extra Payments</Link>
+            </li>
+            <li>
+              <Link to="/Graphs/Welcome/User">Graphs!</Link>
+            </li>
+          </ul>
+        </header>
+          <div>
+            <Switch>
+              <Route exact path="/" component={Home}/>
+              <Route exact path="/Amortization" component={Amortization} />
+              <Route exact path="/Extra_Payments" component={ExtraPayments}/>
+              <Route exact path="/Graphs/:firstname/:lastname" component={Graphs} />
+            </Switch>
+          </div>
+        
+      </div>
+    </Router>
+
   )
 }
 
