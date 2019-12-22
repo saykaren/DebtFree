@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/payitoff/static/css/main.1993044a.chunk.css",
-    "main.js": "/payitoff/static/js/main.29d90018.chunk.js",
-    "main.js.map": "/payitoff/static/js/main.29d90018.chunk.js.map",
-    "runtime-main.js": "/payitoff/static/js/runtime-main.da42ae10.js",
-    "runtime-main.js.map": "/payitoff/static/js/runtime-main.da42ae10.js.map",
-    "static/js/2.36c2e947.chunk.js": "/payitoff/static/js/2.36c2e947.chunk.js",
-    "static/js/2.36c2e947.chunk.js.map": "/payitoff/static/js/2.36c2e947.chunk.js.map",
-    "index.html": "/payitoff/index.html",
-    "precache-manifest.dba96a8cdeca14056ef0e27e0584c5f3.js": "/payitoff/precache-manifest.dba96a8cdeca14056ef0e27e0584c5f3.js",
-    "service-worker.js": "/payitoff/service-worker.js",
-    "static/css/main.1993044a.chunk.css.map": "/payitoff/static/css/main.1993044a.chunk.css.map"
+    "main.css": "/DebtFree/static/css/main.1993044a.chunk.css",
+    "main.js": "/DebtFree/static/js/main.00d5f84f.chunk.js",
+    "main.js.map": "/DebtFree/static/js/main.00d5f84f.chunk.js.map",
+    "runtime-main.js": "/DebtFree/static/js/runtime-main.543487ee.js",
+    "runtime-main.js.map": "/DebtFree/static/js/runtime-main.543487ee.js.map",
+    "static/js/2.36c2e947.chunk.js": "/DebtFree/static/js/2.36c2e947.chunk.js",
+    "static/js/2.36c2e947.chunk.js.map": "/DebtFree/static/js/2.36c2e947.chunk.js.map",
+    "index.html": "/DebtFree/index.html",
+    "precache-manifest.0d6e723685a65b8786058c5087c4e5af.js": "/DebtFree/precache-manifest.0d6e723685a65b8786058c5087c4e5af.js",
+    "service-worker.js": "/DebtFree/service-worker.js",
+    "static/css/main.1993044a.chunk.css.map": "/DebtFree/static/css/main.1993044a.chunk.css.map"
   },
   "entrypoints": [
-    "static/js/runtime-main.da42ae10.js",
+    "static/js/runtime-main.543487ee.js",
     "static/js/2.36c2e947.chunk.js",
     "static/css/main.1993044a.chunk.css",
-    "static/js/main.29d90018.chunk.js"
+    "static/js/main.00d5f84f.chunk.js"
   ]
 }
