@@ -1,4 +1,3 @@
-/* colors darkest #232C31   dark brown #807975 light blue #97B1D2 dark blue #2E5B88 light brown #D6C9BB */
 @import './variables.scss';
 
 // $primary-background-color: #7b7b7c;
@@ -12,7 +11,7 @@
 
 // $primary-text-color: white;
 
-root{
+#root {
   background-color: $primary-background-color;
 }
 
@@ -68,6 +67,12 @@ button:hover{
 .extraResult{
   display: flex;
 
+}
+
+.header {
+  color: $primary-text-color;
+  margin-left: 20%;
+  font-size: 3rem;
 }
 
 #topInput{

@@ -96,9 +96,24 @@ const MainStateApp= () => {
     }
   }
 
+  const resetCalculation = () =>{
+    setPrincipal(0);
+    setInterestRate(0);
+    setMonthlyPayment(0);
+    setExtraPayment(0);
+    setExtraPrincipalPaidArray([]);
+    setInterestPaidArray([]);
+    setNewEndingPrincipalArray([]);
+    setPrincipalPaidArray([]);
+    setInterestPaidArray([]);
+    setNewEndingPrincipalArray([]);
+    setExtraInterestPaidArray([]);
+    setExtraNewEndingPrincipalArray([]);
+  }
 
   return (
     <div className="App">
+      
     
       <InputSection 
           principal={principal}
@@ -109,7 +124,9 @@ const MainStateApp= () => {
           setMonthlyPayment={setMonthlyPayment}
           extraPayment={extraPayment} 
           setExtraPayment={setExtraPayment}
+          monthArray={monthArray}
         />
+        <h2 className="header">You Can Do Anything You Put Your Mind To!</h2>
       {/* <AmortizationResult 
         
         titleInfo={titleInfo} 
@@ -140,6 +157,7 @@ const MainStateApp= () => {
       <section className="results">
         <section id="AmortizationSchedule">
         <button onClick={()=>generateCalculation()}>Calculate</button>
+        <button onClick={()=>resetCalculation()}>Reset</button>
         <h2>Amortization schedule</h2>
           <table>
             <tr className="titleGroup">

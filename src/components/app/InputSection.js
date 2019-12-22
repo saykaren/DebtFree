@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './../stylesheet/App.scss';
 import FormDiv from './forms/FormDiv';
 
-const InputSection = ({principal, setPrincipal,interestRate, setInterestRate, monthlyPayment, setMonthlyPayment,extraPayment, setExtraPayment })=>{
+const InputSection = ({principal, setPrincipal,interestRate, setInterestRate, monthlyPayment, setMonthlyPayment,extraPayment, setExtraPayment, monthArray})=>{
   //User Input 
 //   const [principal, setPrincipal] = useState(10000);
 //   const [interestRate, setInterestRate] = useState(3.125);
@@ -13,6 +13,17 @@ const InputSection = ({principal, setPrincipal,interestRate, setInterestRate, mo
 
     return(
         <section id="topInput">
+
+          <form className="inputGroup">
+            <select className="inputBox">
+              Month Start Date
+              {monthArray.map((col, index)=>(
+                <option value={col} key={index}>
+                  {col}
+                </option>
+              ))}
+            </select>
+        </form>
         <FormDiv
           title="Loan/Mortgage Amount Second Column"
           value={principal}
@@ -37,6 +48,7 @@ const InputSection = ({principal, setPrincipal,interestRate, setInterestRate, mo
           changeParameter={setExtraPayment}
           type="number"
         />
+
 
 
       </section>
