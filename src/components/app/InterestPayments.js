@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './App.css';
+import './../stylesheet/App.scss';
 import numberConverter from './App';
 import PieChart from 'react-minimal-pie-chart';
  
@@ -14,7 +14,7 @@ const InterestPayments = ({interestPaid, principal, principalPaid}) =>{
     // console.log(principal);
 
     return(
-        <div className="reportResults">
+        <div className={totalInterest===0 ? 'hidden' : "reportResults"}>
             Total Interest Paid Over Loan: $
             {totalInterest}
             <div >
@@ -26,7 +26,7 @@ const InterestPayments = ({interestPaid, principal, principalPaid}) =>{
                 {amountOfMonths}
             </div>
             <div id="container">
-            <PieChart
+            {/* <PieChart
                 animate
                 animationDuration={500}
                 animationEasing="ease-out"
@@ -61,7 +61,7 @@ const InterestPayments = ({interestPaid, principal, principalPaid}) =>{
                 ratio={1}
                 rounded
                 startAngle={0}
-            />
+            /> */}
             </div>
         </div>
     )

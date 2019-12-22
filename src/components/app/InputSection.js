@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './App.css';
+import './../stylesheet/App.scss';
 import FormDiv from './forms/FormDiv';
 
 const InputSection = ({principal, setPrincipal,interestRate, setInterestRate, monthlyPayment, setMonthlyPayment,extraPayment, setExtraPayment })=>{

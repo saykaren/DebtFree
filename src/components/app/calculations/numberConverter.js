@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './../App.css';
+import './../../stylesheet/App.scss';
 
 const numberConverter =(value) =>{
     return parseFloat((value).toFixed(2));

@@ -1,11 +1,10 @@
 import React from 'react';
-import InputSection from './../InputSection';
+import MainStateApp from './../MainStateApp';
 
 const Home = () =>{
     return(
         <>
-        <InputSection />
-        Hola
+        <MainStateApp />
         </>
     )
 }

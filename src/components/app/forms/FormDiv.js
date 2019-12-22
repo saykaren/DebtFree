@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './../App.css';
+import './../../stylesheet/App.scss';
 
 export const FormDiv = ({title, value, changeParameter, type})=>{
     return(

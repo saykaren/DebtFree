@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import './App.css';
-import FormDiv from './App.js';
+import './../stylesheet/App.scss';
+import FormDiv from './forms/FormDiv';
 import ResultArrayReturn from './forms/ResultArrayReturn';
 
 

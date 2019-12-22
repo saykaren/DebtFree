@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import './App.css';
+import React, { useState} from 'react';
+import './../stylesheet/App.scss';
 import InterestPayments from './InterestPayments';
 import Completion from './Completion';
 import HypotheticalAnalysis from './HypotheticalAnalysis';
@@ -7,6 +7,11 @@ import ResultArrayReturn from './forms/ResultArrayReturn';
 import numberConverter from'./calculations/numberConverter';
 import FormDiv from './forms/FormDiv';
 import InputSection from './InputSection';
+import AmortizationResult from './pages/Amortization';
+import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom';
+import Footer from './Footer';
+import Graphs from './pages/Graphs';
+
 
 ///Dates
 let todayDate = new Date();
@@ -14,10 +19,15 @@ let monthToday = todayDate.getMonth();
 let yearToday = todayDate.getFullYear();
 
 
-const titleInfo = ["Date", "Principal Paid", "Interest Paid", "Ending Principal"];
+export const titleInfo = ["Date", "Principal Paid", "Interest Paid", "Ending Principal"];
 const titleExtraInfo = ["Principal Paid", "Interest Paid", "Ending Principal"];
 
 const MainStateApp= () => {
+  
+  //Pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage, setPostsPerPage] = useState(4);
+  
   let monthArray = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   let yearArray = [2020];
 
@@ -83,17 +93,13 @@ const MainStateApp= () => {
 
       setExtraNewEndingPrincipalArray([...extraNewEndingPrincipalArray, extraBalance]);
 
-      // console.log({extraInterestPaidArray});
-      // let monthDateIndex = (monthDate.length)-(Math.floor(monthDate.length/12)*12);
-      // setMonthDate([...monthDate, monthArray[monthDateIndex]]);
     }
   }
- 
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        Give no other option not to change!
-      </header>
+    
       <InputSection 
           principal={principal}
           setPrincipal={setPrincipal}
@@ -104,8 +110,62 @@ const MainStateApp= () => {
           extraPayment={extraPayment} 
           setExtraPayment={setExtraPayment}
         />
+      {/* <AmortizationResult 
+        
+        titleInfo={titleInfo} 
+        titleExtraInfo={titleExtraInfo}
+        extraPayment={extraPayment}
+        monthDate={monthDate}
+        principalPaidArray={principalPaidArray}
+        interestPaidArray={interestPaidArray}
+        newEndingPrincipalArray={newEndingPrincipalArray}
+        principal={principal}
+        generateCalculation={generateCalculation} 
+      /> */}
+
+<section className="evaluate">
+
+<InterestPayments 
+  interestPaid={interestPaidArray} 
+  principal={principal} 
+  principalPaid={principalPaidArray}
+/>   
+<Completion 
+  interestPaidArray={interestPaidArray}
+  monthArray={monthArray}
+  principal={principal}
+/>
+</section>   
+
       <section className="results">
-        <div id="AmortizationSchedule">
+        <section id="AmortizationSchedule">
+        <button onClick={()=>generateCalculation()}>Calculate</button>
+        <h2>Amortization schedule</h2>
+          <table>
+            <tr className="titleGroup">
+                {titleInfo.map((col, index)=>(
+                  <th className="title"
+                    key={index}
+                  >
+                    {col}
+                    </th>
+                ))}
+
+            {titleExtraInfo.map((col, index)=>(
+              <th className={extraPayment>0 ? "title" : "hidden"}
+                key={index}
+                >
+                  {col}
+                </th>
+            ))}
+            </tr>
+          </table>
+
+
+
+
+
+{/* 
           <h2>Amortization schedule</h2>
 
           <button onClick={()=>generateCalculation()}>Calculate</button>
@@ -126,7 +186,7 @@ const MainStateApp= () => {
               </div>
             ))}
 
-          </div>
+          </div> */}
           
           
           <div id="amortizationResults">
@@ -157,21 +217,10 @@ const MainStateApp= () => {
             />
  
           </div>
-        </div>
-        <section className="evaluate">
-
-          <InterestPayments 
-            interestPaid={interestPaidArray} 
-            principal={principal} 
-            principalPaid={principalPaidArray}
-          />   
-          <Completion 
-            interestPaidArray={interestPaidArray}
-            monthArray={monthArray}
-            principal={principal}
-          />
-        </section>    
+        </section>
+     
       </section>
+      <Footer />
     </div>
     
   );

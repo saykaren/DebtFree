@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import './../App.css';
+
+import './../../stylesheet/App.scss';
 
 const ResultArrayReturn = ({specificClassName, arrayToMap, symbol})=>{
     return(

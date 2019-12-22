@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './App.css';
+import './../stylesheet/App.scss';
 import numberConverter from './App';
 import PieChart from 'react-minimal-pie-chart';
 import sumItUp from './InterestPayments';
@@ -18,7 +18,7 @@ const Completion = ({interestPaidArray, monthArray, principal} )=>{
     if(interestPaidArray.length>0){
         let bankGotThisMuch = sumThemUp(interestPaidArray)+principal;
         return(
-            <div>
+            <div className='completion'>
                 <h2>{lastMonth} is when you paided off your loan! Whoohoo!</h2>
                 <section>
                     You paid the bank ${bankGotThisMuch} to borrow {principal}
@@ -27,7 +27,7 @@ const Completion = ({interestPaidArray, monthArray, principal} )=>{
         )
     }
          return(
-            <div>Still Calculating....</div>
+            <div className="hidden">Still Calculating....</div>
         )
    
 };

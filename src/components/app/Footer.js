@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import './../stylesheet/App.scss';
 import sayKarenLogo from './../../assests/sayKaren_Logo_transparent_7.2019.png'
 
 const Footer= ()=> (
