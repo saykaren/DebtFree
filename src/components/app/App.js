@@ -6,6 +6,7 @@ import Amortization from './pages/Amortization';
 import ExtraPayments from './pages/ExtraPayments';
 import Graphs from './pages/Graphs';
 import Footer from './Footer';
+import NotFound404 from './pages/404';
 
 
 import MainStateApp from './MainStateApp';
@@ -47,7 +48,8 @@ const App = ()=>{
               <Route exact path="/DebtFree/Extra_Payments" component={ExtraPayments}/>
               <Route exact path="/DebtFree/Graphs/:firstname/:lastname" component={Graphs} />
               <Route path="/saykaren.github.io/" component={Graphs}/>
-              <Route component={MainStateApp} />
+              {/* <Route component={MainStateApp} /> */}
+              <Route path="" component={NotFound404} />
             </Switch>
           </section>
         <Footer />
