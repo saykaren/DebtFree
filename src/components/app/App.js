@@ -19,34 +19,35 @@ const App = ()=>{
         <header className="App-header">
           <ul>
             <li>
-              <Link to="/">Home</Link>
+              <Link to="/DebtFree/">Home</Link>
             </li>
             <li>
               <Link to={
                 {
-                  pathname: "/Amortization",
+                  pathname: "/DebtFree/Amortization",
                   state: {
                     
                     from:"./MainStateApp.js"
                   }
                 }
-              }>Amortization</Link>
+              }>Amortization New</Link>
             </li>
             <li>
-              <Link to="/Extra_Payments">Extra Payments</Link>
+              <Link to="/DebtFree/Extra_Payments">Extra Payments</Link>
             </li>
             <li>
-              <Link to="/Graphs/Welcome/User">Graphs!</Link>
+              <Link to="/DebtFree/Graphs/Welcome/User">Graphs!</Link>
             </li>
           </ul>
         </header>
           <section id="main">
             <Switch>
               <Route exact path="/" component={Home}/>
-              <Route exact path="/Amortization" component={Amortization} />
-              <Route exact path="/Extra_Payments" component={ExtraPayments}/>
-              <Route exact path="/Graphs/:firstname/:lastname" component={Graphs} />
+              <Route exact path="/DebtFree/Amortization" component={Amortization} />
+              <Route exact path="/DebtFree/Extra_Payments" component={ExtraPayments}/>
+              <Route exact path="/DebtFree/Graphs/:firstname/:lastname" component={Graphs} />
               <Route path="/saykaren.github.io/" component={Graphs}/>
+              <Route component={MainStateApp} />
             </Switch>
           </section>
         <Footer />
