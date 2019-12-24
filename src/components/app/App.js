@@ -46,6 +46,7 @@ const App = ()=>{
               <Route exact path="/Amortization" component={Amortization} />
               <Route exact path="/Extra_Payments" component={ExtraPayments}/>
               <Route exact path="/Graphs/:firstname/:lastname" component={Graphs} />
+              <Route path="/saykaren.github.io/" component={Graphs}/>
             </Switch>
           </section>
         <Footer />
